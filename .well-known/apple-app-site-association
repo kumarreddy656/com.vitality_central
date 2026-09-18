@@ -1,32 +1,20 @@
-
 {
   "applinks": {
     "apps": [],
     "details": [
       {
-        "appID": "SU2V5Z44TL.com.siddhiapp.tataaia",
+        "appID": "WDYWGXWGAA.com.vitalityactive.va",
         "paths": [
-          "*"
-        ]
-      },
-      {
-        "appID": "39W2YX8GZ4.com.siddhiapp.tataaia",
-        "paths": [
-          "*"
-        ]
-      },
-      {
-        "appIDs": [
-          "SU2V5Z44TL.com.vitalityactive.tataaia"
+          "/com.vitality_central/*",
+          "/com.vitality_central"
         ],
-        "paths": [
-          "/portfolio/login_screen"
-        ]
-      },
-      {
-        "appID": "1634923478.com.talic.customerapp",
-        "paths": [
-          "*"
+        "components": [
+          {
+            "/": "/com.vitality_central/*"
+          },
+          {
+            "/": "/com.vitality_central"
+          }
         ]
       }
     ]
