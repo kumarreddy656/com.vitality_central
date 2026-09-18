@@ -1,17 +1,127 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Page</title>
-</head>
-<body style="font-family: Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
-
-    <div style="text-align: center; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <h1 style="color: #333; margin-bottom: 10px;">Welcome to Our Website!</h1>
-        <p style="color: #666; font-size: 18px; margin-top: 0;">We are glad to have you here. Explore and enjoy your stay.</p>
-    </div>
-
-</body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Opening App...</title>
+      <style>
+         body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               Helvetica, Arial, sans-serif;
+            text-align: center;
+            padding: 40px 20px;
+            color: #333;
+            background-color: #f7f8fa;
+         }
+         .card {
+            max-width: 420px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+         }
+         h2 {
+            margin-top: 0;
+            color: #0b1a30;
+         }
+         p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.5;
+         }
+         .btn {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 14px 0;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-sizing: border-box;
+         }
+         .btn-primary {
+            background: #007aff;
+            color: white;
+         }
+         .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+         }
+         .spinner {
+            margin: 20px auto;
+            width: 36px;
+            height: 36px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #007aff;
+            animation: spin 1s linear infinite;
+         }
+         @keyframes spin {
+            to {
+               transform: rotate(360deg);
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <div class="card">
+         <div class="spinner" id="spinner"></div>
+         <h2 id="status-title">Opening Vitality App...</h2>
+         <p id="status-desc">
+            If the app doesn't open automatically, use the buttons below.
+         </p>
+         <a id="open-app-btn" class="btn btn-primary" href="vitality-app://home"
+            >Open in App</a
+         >
+         <a id="store-btn" class="btn btn-secondary" href="#">Download App</a>
+      </div>
+      <script>
+         const userAgent =
+            navigator.userAgent || navigator.vendor || window.opera;
+         const isAndroid = /android/i.test(userAgent);
+         const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+         const PLAY_STORE_URL =
+            "https://play.google.com/store/apps/details?id=com.vitalityactive.assetadvance";
+         const APP_STORE_URL = "https://apps.apple.com/app/idYOUR_APPLE_APP_ID"; // Replace with your numeric App Store ID when published
+         const storeBtn = document.getElementById("store-btn");
+         const openAppBtn = document.getElementById("open-app-btn");
+         if (isAndroid) {
+            storeBtn.textContent = "Get it on Google Play";
+            storeBtn.href = PLAY_STORE_URL;
+            const intentUrl =
+               "intent://kumarreddy656.github.io/com.vitality_central" +
+               window.location.pathname.replace("/com.vitality_central", "") +
+               window.location.search +
+               "#Intent;scheme=https;package=com.vitalityactive.assetadvance;S.browser_fallback_url=" +
+               encodeURIComponent(PLAY_STORE_URL) +
+               ";end";
+            openAppBtn.href = intentUrl;
+            window.location.href = intentUrl;
+         } else if (isIOS) {
+            storeBtn.textContent = "Download on the App Store";
+            storeBtn.href = APP_STORE_URL;
+            const customSchemeUrl =
+               "vitality-app://home" + window.location.search;
+            openAppBtn.href = customSchemeUrl;
+            const start = Date.now();
+            window.location.href = customSchemeUrl;
+            setTimeout(function () {
+               if (Date.now() - start < 2000 && !document.hidden) {
+                  window.location.href = APP_STORE_URL;
+               }
+            }, 1500);
+         } else {
+            document.getElementById("status-title").textContent =
+               "Vitality Central";
+            document.getElementById("status-desc").textContent =
+               "Open this link on an iOS or Android device to access the app.";
+            document.getElementById("spinner").style.display = "none";
+            storeBtn.style.display = "none";
+            openAppBtn.style.display = "none";
+         }
+      </script>
+   </body>
 </html>
